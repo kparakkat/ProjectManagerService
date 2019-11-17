@@ -11,7 +11,7 @@
 	<groupId>com.pmservice</groupId>
 	<artifactId>ProjectManagerService</artifactId>
 	<version>0.0.1</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>ProjectManagerService</name>
 	<description>This is a spring boot restful service provides all the rest methods for the project management service.</description>
 
@@ -42,12 +42,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<exclusions>
+			<!-- <exclusions>
 				<exclusion>
 					<groupId>org.junit.vintage</groupId>
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
-			</exclusions>
+			</exclusions>  -->
 		</dependency>
 	</dependencies>
 
