@@ -17,50 +17,49 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pmservice.dao.UserRepository;
+import com.pmservice.dao.ProjectRepository;
+import com.pmservice.models.Project;
 import com.pmservice.models.ResultData;
-import com.pmservice.models.User;
 
 @RestController
-@RequestMapping(path="/user")
-public class UserController {
+@RequestMapping(path="/project")
+public class ProjectController {
 	@Autowired
-	private UserRepository userRepository;
-		
+	private ProjectRepository projectRepository;
+	
 	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping(path="/getAllUsers", produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<Iterable<User>> getAllUsers() {
-		return ResponseEntity.ok().body(userRepository.findAll());
+	@GetMapping(path="/getAllProjects", produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<Iterable<Project>> getAllProjects() {
+		return ResponseEntity.ok().body(projectRepository.findAll());
 	}
 	
 	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping(path="/getByUserId/{userid}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<Optional<User>> getByUserId(@PathVariable("userid") Integer userid)
+	@GetMapping(path="/getByProjectId/{projectid}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<Optional<Project>> getByProjectId(@PathVariable("projectid") Integer projectid)
 	{
-		return new ResponseEntity<Optional<User>>(userRepository.findById(userid), HttpStatus.OK);
+		return new ResponseEntity<Optional<Project>>(projectRepository.findById(projectid), HttpStatus.OK);
 	}
 	
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping(path="/addUser", produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<ResultData> addUser(@RequestBody User user) {
-		userRepository.save(user);
-		// return new ResponseEntity<String>("Added User Successfully !", HttpStatus.OK);
-		ResultData resultData = new ResultData("Added User Successfully !");
+	@PostMapping(path="/addProject", produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<ResultData> addProject(@RequestBody Project project) {
+		projectRepository.save(project);
+		ResultData resultData = new ResultData("Added Project Successfully !");
 		return ResponseEntity.ok().body(resultData);
 	}
 	
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PutMapping(path="/updateUser", produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<ResultData> updateUser(@RequestBody User user) {
-		userRepository.save(user);
+	@PutMapping(path="/updateProject", produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<ResultData> updateProject(@RequestBody Project project) {
+		projectRepository.save(project);
 		ResultData resultData = new ResultData("Updated Successfully !");
 		return ResponseEntity.ok().body(resultData);
 	}
 	
 	@CrossOrigin(origins = "http://localhost:4200")
-	@DeleteMapping(path="/deleteUser/{userid}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<ResultData> deleteUser(@PathVariable("userid") Integer userid) {
-		userRepository.deleteById(userid);
+	@DeleteMapping(path="/deleteProject/{projectid}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<ResultData> deleteProject(@PathVariable("projectid") Integer projectid) {
+		projectRepository.deleteById(projectid);
 		ResultData resultData = new ResultData("Deleted Successfully !");
 		return ResponseEntity.ok().body(resultData);
 	}
