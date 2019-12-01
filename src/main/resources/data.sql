@@ -1,3 +1,11 @@
+-- Insert Parent Tasks
+INSERT IGNORE INTO `pmdb`.`parent_task` (`parenttaskid`, `parenttask`) VALUES ('1', 'Requirement Analysis, preparing BRD document and approval');
+INSERT IGNORE INTO `pmdb`.`parent_task` (`parenttaskid`, `parenttask`) VALUES ('2', 'Design Document Preparation, Review and Approval');
+INSERT IGNORE INTO `pmdb`.`parent_task` (`parenttaskid`, `parenttask`) VALUES ('3', 'Development and Unit Testing');
+INSERT IGNORE INTO `pmdb`.`parent_task` (`parenttaskid`, `parenttask`) VALUES ('4', 'System Testing, Integration Testing and UAT Testing');
+INSERT IGNORE INTO `pmdb`.`parent_task` (`parenttaskid`, `parenttask`) VALUES ('5', 'Production Release and Business and IT Validation');
+INSERT IGNORE INTO `pmdb`.`parent_task` (`parenttaskid`, `parenttask`) VALUES ('6', 'Maintenance and Bug Fixes');
+INSERT IGNORE INTO `pmdb`.`parent_task` (`parenttaskid`, `parenttask`) VALUES ('7', 'Others');
 -- Insert Projects
 INSERT IGNORE INTO `pmdb`.`project` (`projectid`, `project`, `startdate`, `enddate`, `priority`) VALUES ('1', 'Digital Mobile', '2019-11-23', '2019-12-15', '1');
 INSERT IGNORE INTO `pmdb`.`project` (`projectid`, `project`, `startdate`, `enddate`, `priority`) VALUES ('2', 'Analytics Metrics', '2020-01-02', '2020-01-30', '2');

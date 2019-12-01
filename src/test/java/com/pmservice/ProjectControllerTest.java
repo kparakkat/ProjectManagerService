@@ -102,8 +102,7 @@ public class ProjectControllerTest extends AbstractTest{
 		Project response = super.mapFromJson(content, Project.class);
 		assertTrue(response != null);
 	}
-	
-	
+		
 	@Test
 	public void saveUpdateProject() throws Exception {
 		String uri = "/project/saveProject";
