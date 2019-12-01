@@ -41,6 +41,13 @@ public class ProjectController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping(path="/saveProject", produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<Project> saveProject(@RequestBody Project project) {
+		Project savedProject = projectRepository.save(project);
+		return ResponseEntity.ok().body(savedProject);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(path="/addProject", produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<ResultData> addProject(@RequestBody Project project) {
 		projectRepository.save(project);

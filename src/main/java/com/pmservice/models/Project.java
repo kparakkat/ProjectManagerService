@@ -21,7 +21,7 @@ public class Project {
 	private Date enddate;
 	
 	private Integer priority;
-	
+		
 	public Project() {}
 	
 	public Integer getProjectid() {

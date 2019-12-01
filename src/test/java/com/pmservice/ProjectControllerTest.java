@@ -30,7 +30,7 @@ public class ProjectControllerTest extends AbstractTest{
 	}
 	
 	@Test
-	public void createUser() throws Exception {
+	public void createProject() throws Exception {
 		String uri = "/project/addProject";
 		Project project = new Project();
 		project.setProject("STL Tool Integration");
@@ -52,7 +52,7 @@ public class ProjectControllerTest extends AbstractTest{
 		ResultData response = super.mapFromJson(content, ResultData.class);
 		assertEquals(response.getResponse(), "Added Project Successfully !");
 	}
-	
+		
 	@Test
 	public void updateProject() throws Exception {
 		String uri = "/project/updateProject";
@@ -77,6 +77,57 @@ public class ProjectControllerTest extends AbstractTest{
 		String content = mvcResult.getResponse().getContentAsString();
 		ResultData response = super.mapFromJson(content, ResultData.class);
 		assertEquals(response.getResponse(), "Updated Successfully !");
+	}
+	
+	@Test
+	public void saveCreateProject() throws Exception {
+		String uri = "/project/saveProject";
+		Project project = new Project();
+		project.setProject("Oracle Exadata Integration");
+		Date startDate = new Date();
+		LocalDateTime localEndDateTime = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		localEndDateTime = localEndDateTime.plusDays(20);
+		Date endDate = Date.from(localEndDateTime.atZone(ZoneId.systemDefault()).toInstant());
+		project.setStartdate(startDate);
+		project.setEnddate(endDate);
+		project.setPriority(5);
+		
+		String inputJson = super.mapToJson(project);
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri)
+				.contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
+		
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+		String content = mvcResult.getResponse().getContentAsString();
+		Project response = super.mapFromJson(content, Project.class);
+		assertTrue(response != null);
+	}
+	
+	
+	@Test
+	public void saveUpdateProject() throws Exception {
+		String uri = "/project/saveProject";
+		Project project = new Project();
+		Date startDate = new Date();
+		LocalDateTime localEndDateTime = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		localEndDateTime = localEndDateTime.plusDays(60);
+		Date endDate = Date.from(localEndDateTime.atZone(ZoneId.systemDefault()).toInstant());
+		
+		project.setProjectid(5);
+		project.setProject("Brokerage Reporting Java Micro Services");
+		project.setStartdate(startDate);
+		project.setEnddate(endDate);
+		project.setPriority(1);
+		
+		String inputJson = super.mapToJson(project);
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri)
+				.contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
+		
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+		String content = mvcResult.getResponse().getContentAsString();
+		Project response = super.mapFromJson(content, Project.class);
+		assertTrue(response != null);
 	}
 	
 	@Test

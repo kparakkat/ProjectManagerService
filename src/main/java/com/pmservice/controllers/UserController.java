@@ -41,10 +41,16 @@ public class UserController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping(path="/getByProjectId/{projectid}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<User> getByProjectId(@PathVariable("projectid") Integer projectid)
+	{
+		return new ResponseEntity<User>(userRepository.findByProjectid(projectid), HttpStatus.OK);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(path="/addUser", produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<ResultData> addUser(@RequestBody User user) {
 		userRepository.save(user);
-		// return new ResponseEntity<String>("Added User Successfully !", HttpStatus.OK);
 		ResultData resultData = new ResultData("Added User Successfully !");
 		return ResponseEntity.ok().body(resultData);
 	}

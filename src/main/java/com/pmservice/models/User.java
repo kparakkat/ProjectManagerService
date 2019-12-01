@@ -59,15 +59,15 @@ public class User {
 	public void setEmployeeid(Integer value) {
 		this.employeeid = value;
 	}
-	
+		
 	public Integer getProjectid() {
-		return projectid;
+	 	return projectid;
 	}
 	
 	public void setProjectid(Integer value) {
 		this.projectid = value;
 	}
-	
+		
 	public Integer getTaskid() {
 		return taskid;
 	}
@@ -75,5 +75,4 @@ public class User {
 	public void setTaskid(Integer value) {
 		this.taskid = value;
 	}
-	
 }
