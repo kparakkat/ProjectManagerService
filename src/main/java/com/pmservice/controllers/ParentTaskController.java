@@ -39,10 +39,10 @@ public class ParentTaskController {
 	{
 		return new ResponseEntity<Optional<ParentTask>>(parentTaskRepository.findById(id), HttpStatus.OK);
 	}
-	
+		
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(path="/saveParentTask", produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<ParentTask> saveProject(@RequestBody ParentTask parentTask) {
+	public @ResponseBody ResponseEntity<ParentTask> saveParentTask(@RequestBody ParentTask parentTask) {
 		ParentTask savedParentTask = parentTaskRepository.save(parentTask);
 		return ResponseEntity.ok().body(savedParentTask);
 	}

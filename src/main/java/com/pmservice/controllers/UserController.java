@@ -48,6 +48,13 @@ public class UserController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping(path="/getByTaskId/{taskid}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<User> getByTaskId(@PathVariable("taskid") Integer taskid)
+	{
+		return new ResponseEntity<User>(userRepository.findByTaskid(taskid), HttpStatus.OK);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(path="/addUser", produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<ResultData> addUser(@RequestBody User user) {
 		userRepository.save(user);

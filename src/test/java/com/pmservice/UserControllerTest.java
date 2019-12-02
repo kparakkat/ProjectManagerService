@@ -38,6 +38,19 @@ public class UserControllerTest extends AbstractTest {
 	}
 	
 	@Test
+	public void getByTaskId() throws Exception {
+		String uri = "/user/getByTaskId/4";
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
+				.accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+		
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+		String content = mvcResult.getResponse().getContentAsString();
+		User user = super.mapFromJson(content, User.class);
+		assertTrue(user != null);
+	}
+	
+	@Test
 	public void createUser() throws Exception {
 		String uri = "/user/addUser";
 		User user = new User();
