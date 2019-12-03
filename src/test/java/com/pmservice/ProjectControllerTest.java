@@ -14,8 +14,22 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.pmservice.models.Project;
 import com.pmservice.models.ResultData;
+import com.pmservice.models.Task;
 
 public class ProjectControllerTest extends AbstractTest{
+	@Test
+	public void getAllProjects() throws Exception {
+		String uri = "/project/getAllProjects";
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
+				.accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+		
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+		String content = mvcResult.getResponse().getContentAsString();
+		Project[] projects = super.mapFromJson(content, Project[].class);
+		assertTrue(projects.length > 0);
+	}
+	
 	@Test
 	public void getByProjectId() throws Exception {
 		String uri = "/project/getByProjectId/1";

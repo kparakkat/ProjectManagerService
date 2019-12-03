@@ -7,10 +7,24 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import com.pmservice.models.Project;
 import com.pmservice.models.ResultData;
 import com.pmservice.models.User;
 
 public class UserControllerTest extends AbstractTest {
+	@Test
+	public void getAllUsers() throws Exception {
+		String uri = "/user/getAllUsers";
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
+				.accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+		
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+		String content = mvcResult.getResponse().getContentAsString();
+		User[] users = super.mapFromJson(content, User[].class);
+		assertTrue(users.length > 0);
+	}
+	
 	@Test
 	public void getByUserId() throws Exception {
 		String uri = "/user/getByUserId/1";

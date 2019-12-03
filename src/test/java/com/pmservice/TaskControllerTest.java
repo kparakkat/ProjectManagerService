@@ -18,6 +18,19 @@ import com.pmservice.models.Task;
 public class TaskControllerTest extends AbstractTest{
 
 	@Test
+	public void getAllTasks() throws Exception {
+		String uri = "/task/getAllTasks";
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
+				.accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+		
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+		String content = mvcResult.getResponse().getContentAsString();
+		Task[] tasks = super.mapFromJson(content, Task[].class);
+		assertTrue(tasks.length > 0);
+	}
+	
+	@Test
 	public void getByTaskId() throws Exception {
 		String uri = "/task/getByTaskId/1";
 		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
@@ -28,6 +41,19 @@ public class TaskControllerTest extends AbstractTest{
 		String content = mvcResult.getResponse().getContentAsString();
 		Task task = super.mapFromJson(content, Task.class);
 		assertTrue(task != null);
+	}
+	
+	@Test
+	public void getByProjectId() throws Exception {
+		String uri = "/task/getByProjectId/3";
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
+				.accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+		
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+		String content = mvcResult.getResponse().getContentAsString();
+		Task[] tasks = super.mapFromJson(content, Task[].class);
+		assertTrue(tasks.length > 0);
 	}
 	
 	@Test

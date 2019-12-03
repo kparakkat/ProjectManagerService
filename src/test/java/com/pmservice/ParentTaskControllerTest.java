@@ -9,8 +9,22 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.pmservice.models.ParentTask;
 import com.pmservice.models.ResultData;
+import com.pmservice.models.User;
 
 public class ParentTaskControllerTest extends AbstractTest {
+	@Test
+	public void getAllParentTasks() throws Exception {
+		String uri = "/parentTask/getAllParentTasks";
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
+				.accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+		
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+		String content = mvcResult.getResponse().getContentAsString();
+		ParentTask[] parentTasks = super.mapFromJson(content, ParentTask[].class);
+		assertTrue(parentTasks.length > 0);
+	}
+	
 	@Test
 	public void getByParentTaskId() throws Exception {
 		String uri = "/parentTask/getByParentTaskId/1";
